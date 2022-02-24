@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Test</title>
+</head>
+<body>
+    <h1>Test the data</h1>
+
+    <div class="my-3">
+    
+    {% comment %} {% if account %}
+    {% for a in account %}
+    <ul>
+        <li>{{ a}}</li>
+        <li>{{ a.is_staff }}</li>
+        <li>{{ a.email }}</li>
+        <li>{{ a.is_superadmin }}</li>
+    </ul>
+    {% endfor %}
+    {% endif %} {% endcomment %}
+    </div>
+    
+
+    <div>
+        {% if lead %}
+        {% for l in lead  %}
+        <ul>
+            <li>{{ l }}</li>
+            <li>{{ l.name }}</li>
+            <li>{{ l.email }}</li>
+        </ul>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {{ form }}
+    <form action="" method="">
+        {{ form }}
+    </form>
+
+<div class="btn-group">
+    <a href="/logout/" class="btn btn-danger">Logout</a>
+</div>
+</body>
+</html>
