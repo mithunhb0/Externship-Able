@@ -3,8 +3,9 @@ from django.contrib import messages, auth
 from django.http import HttpResponseRedirect
 from authentication.forms import RegistrationForm
 from authentication.models import Account
-from dashboard.models import Lead
+from dashboard.models import Lead, Remark
 from django.contrib.auth.decorators import login_required 
+from django.views.decorators.csrf import csrf_exempt
 
 # from rest_framework.viewsets import *
 # from rest_framework.authentication import JSONWebTokenAuthentication
@@ -35,6 +36,7 @@ def register(request):
     }
     return render(request, 'authentication/register.html', context)
 
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -44,22 +46,13 @@ def login(request):
         
         if user is not None:
             auth.login(request, user)
-            # is_staff = False
-            # account = Account.objects.all()
-            # print('account',account)
-            # print('type of account',type(account))
-            # print('email',account.email)
-            
-            # account = Account.objects.filter(is_staff=request.POST['is_staff'])
-            # print('account',account)
-            
-            # print('account is staff',account.is_staff)
-            # if account.is_staff == True:
-            #     return HttpResponseRedirect('/dashboard/')
-            # else:
-            #     messages.info(request,'You are not varified, Please cantact Manager ')
-            #     return HttpResponseRedirect('/login/')
-            return HttpResponseRedirect('/dashboard/')  
+
+            if user.is_staff == True:
+                return HttpResponseRedirect('/dashboard/')
+            else:
+                messages.info(request,'You are not varified, Please cantact Manager ')
+                return HttpResponseRedirect('/login/')
+
         else:
             messages.info(request,'Invalid credentials')
             return HttpResponseRedirect('/login/')
@@ -75,23 +68,16 @@ def logout(request):
 
 @login_required(login_url = 'login')
 def test(request):
-    # is_staff = None
-    # account = Account.objects.filter(is_staff=is_staff)
-    # # data = request.GET.get()
-    # print(account)
-    
-    # if request.user.is_authenticated():
-    #     email = request.user.email
-    #     id_user = request.user.id
-    #     fav = Account.objects.filter(user_id=id_user, email=email)
-    #     print(fav)
-        
     account = Account.objects.all()
     print('account',account)
-    # email = None
-    # staff = None
-    # a = Account.objects.get(is_staff=staff)
-    # print(a.is_staff)
+    remark = Remark()
+    print('remark',remark.remark_area)
+    print(remark.remark_area)
+    
+
+  
+
+
     lead = Lead.objects.all()
     print(lead)
     context = {

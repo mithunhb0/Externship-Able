@@ -5,6 +5,7 @@ urlpatterns = [
     path('',views.display, name="dashboard"),
     path('newlead/',views.newlead, name="newlead"),
     path('hotlead/',views.hotlead, name="hotlead"),
+    path('remark/',views.addremark, name="remark"),
     
-   
+  
 ]

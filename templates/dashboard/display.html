@@ -23,6 +23,7 @@
     {% csrf_token %}
 
     <!-- Modal add remark -->
+    <form action="/dashboard/" method="post">
     <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -32,7 +33,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-floating">
-                    {{form.add_remark}}
+                  <textarea name="remark_area" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
                     <label for="floatingTextarea2">Add our remarks here</label>
                   </div>
             </div>
@@ -42,6 +43,7 @@
           </div>
         </div>
       </div>
+    </form>
     <!-- Modal view -->
     <div class="modal fade" id="exampleModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -117,7 +119,19 @@
                     <td>{{ l.email }} </td>
                     <td>{{ l.phone_number }}</td>
                     <td>{{ l.assigned_to }}</td>
-                    <td>{{form.status}}</td>
+                    <td>
+                        <form action="" method="post">  
+                          <select name="status">  
+                          <option > New lead</option>  
+                          <option > Hot lead</option>  
+                          <option > Med lead</option>  
+                          <option > Grey lead</option>  
+                          <option > Success</option>    
+                          </select>
+                          <input type="submit" value="submit" name="Submit">  
+                          </form>
+  
+                      </td>
                     <td><a class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" href="">+Add</a></td>
                     <td><a class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal" href="">View</a></td>               
                 </tr>
